@@ -141,3 +141,29 @@ public class NoClipPatch6 {
         return false;
     }
 }
+
+[HarmonyPatch(typeof(DiveBellPlayerDetector), nameof(DiveBellPlayerDetector.CheckForPlayers))]
+// Diving bell missing players fix (https://github.com/FlawTECH/CWissKnife/issues/2)
+public class NoClipPatch7 {
+    static void Postfix(ref ICollection<Player> __result, DiveBellPlayerDetector __instance, Collider[] ___results) {
+        if (!PhotonNetwork.IsMasterClient || MainMenuHandler.SteamLobbyHandler.IsPlayingWithRandoms()) {
+            return;
+        }
+
+        if (!Plugin.configToggleNoclip.Value)
+            return;
+
+        foreach (Transform transform in __instance.m_detectors)
+		{
+			int num = Physics.OverlapBoxNonAlloc(transform.position, transform.lossyScale * 0.5f, ___results, transform.rotation);
+			for (int j = 0; j < num; j++)
+			{
+				Collider collider = ___results[j];
+                Player componentInParent = collider.GetComponentInParent<Player>();
+                if (componentInParent && !__result.Contains(componentInParent)) {
+                    __result.Add(componentInParent);
+                }
+            }
+        }
+    }
+}
