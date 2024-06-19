@@ -11,6 +11,6 @@ jobs:
         with:
           days-before-stale: 30
           days-before-close: 7
-          stale-issue-message: 'This issue has been marked as stale and will be closed in 7 of inactivity'
-          stale-pr-message: 'This PR has been marked as stale and will be closed in 7 of inactivity'
+          stale-issue-message: 'This issue has been marked as stale and will be closed after 7 days of inactivity'
+          stale-pr-message: 'This PR has been marked as stale and will be closed after 7 days of inactivity'
           any-of-labels: 'needs more info'
