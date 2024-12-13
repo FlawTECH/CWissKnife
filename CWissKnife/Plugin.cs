@@ -3,6 +3,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using UnityEngine;
 
 namespace CWissKnife
 {
@@ -24,6 +25,8 @@ namespace CWissKnife
         {
             // Plugin startup logic
             Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            // Fix ConfigurationManager not showing up
+            this.gameObject.hideFlags = HideFlags.HideAndDontSave;
             Log = Logger;
 
             // Configuration

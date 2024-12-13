@@ -43,10 +43,9 @@ public class NoClipPatch {
         }
         wereCollisionsFixed = false;
 
-        jumpPressed = ___player.input.jumpIsPressed;
-        crouchPressed = ___player.input.crouchIsPressed;
+        jumpPressed = Input.GetKey(GlobalInputHandler.JumpKey.KeyCodeSetting.Keycode());
+        crouchPressed = Input.GetKey(GlobalInputHandler.CrouchKey.KeyCodeSetting.Keycode());
         ___player.input.jumpWasPressed = false;
-        ___player.input.jumpIsPressed = false;
     }
 
     static void Postfix(PlayerRagdoll ___ragdoll, Player ___player) {
